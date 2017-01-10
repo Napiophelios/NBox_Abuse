@@ -1,0 +1,14 @@
+License:CC-BY-3.0
+https://creativecommons.org/licenses/by/3.0/
+
+original file name: sheepHit.flac / sheepBleet.flac
+Author: Blender Foundation
+http://opengameart.org/content/funny-comic-cartoon-bounce-sound
+converted to ogg format/renamed for this mod.
+new file name:  nbea_sheep.ogg / nbea_sheep_hurt.ogg
+
+original file name: BounceYoFrankie.flac
+Author: Blender Foundation
+http://opengameart.org/content/funny-comic-cartoon-bounce-sound
+converted to ogg format/renamed for this mod.
+new file name: nbea_bounce.ogg
