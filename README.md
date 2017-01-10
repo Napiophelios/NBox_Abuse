@@ -18,7 +18,7 @@ Several pointless nodes that look neat
 
 =====================
 
-![Preview](https://screenshot)
+![Preview](https://raw.githubusercontent.com/Napiophelios/NBox_Abuse/master/screenshot.png)
 
 Textures by Napiophelios
 License : Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)
