@@ -3,14 +3,14 @@
 -- License: WTFPL
 
 minetest.register_node("nbea:nbox_000", {
-    description = "Simple Wood Frame",
+    	description = "Simple Wood Frame",
 	tiles = {"default_wood.png"},
 	drawtype = "nodebox",
 	paramtype = "light",
 	sunlight_propagates = true,
 	climbable = true,
 	is_ground_content = false,
-    groups = {oddly_breakable_by_hand=3, choppy = 3},
+    	groups = {oddly_breakable_by_hand=3, choppy = 3},
 	sounds = default.node_sound_wood_defaults(),
 	node_box = {
 		type = "fixed",
@@ -41,7 +41,7 @@ minetest.register_node("nbea:nbox_000", {
 minetest.register_node("nbea:nbox_001", {
 	description = "Wood Framed Glass",
 	inventory_image = "default_glass.png^nbea_wood.png",
-    wield_image = "default_glass.png^nbea_wood.png",
+    	wield_image = "default_glass.png^nbea_wood.png",
 	tiles = {"default_glass.png^nbea_wood.png"},
 	drawtype = "nodebox",
 	paramtype = "light",
@@ -135,9 +135,9 @@ minetest.register_node("nbea:nbox_001", {
 
 minetest.register_node("nbea:nbox_002", {
 	description = "Steel Framed Glass",
-    inventory_image = "default_glass.png^nbea_steel.png",
-    wield_image = "default_glass.png^nbea_steel.png",
-    tiles = {"default_glass.png^nbea_steel.png"},
+    	inventory_image = "default_glass.png^nbea_steel.png",
+    	wield_image = "default_glass.png^nbea_steel.png",
+    	tiles = {"default_glass.png^nbea_steel.png"},
 	drawtype = "nodebox",
 	paramtype = "light",
 	sunlight_propagates = true,
@@ -227,18 +227,18 @@ minetest.register_node("nbea:nbox_002", {
 })
 
 minetest.register_node("nbea:nbox_003", {
-    description = "Inner-Cube",
+    	description = "Inner-Cube",
 	tiles = {"default_meselamp.png"},
 	drawtype = "nodebox",
 	paramtype = "light",
-    light_source = 11,
+  	light_source = 11,
 	sunlight_propagates = true,
 	is_ground_content = false,
 	groups = {cracky = 3},
 	sounds = default.node_sound_metal_defaults({
 		footstep = {name = "default_glass_footstep", gain = 0.5},
 		dug = {name = "default_break_glass", gain = 1.0},
-    }),
+    	}),
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -268,18 +268,18 @@ minetest.register_node("nbea:nbox_003", {
 })
 
 minetest.register_node("nbea:nbox_004", {
-    description = "Encased-Cube",
+    	description = "Encased-Cube",
 	tiles = {"default_meselamp.png"},
 	drawtype = "nodebox",
 	paramtype = "light",
-    light_source = 14,
+    	light_source = 14,
 	sunlight_propagates = true,
 	is_ground_content = false,
 	groups = {cracky = 3},
 	sounds = default.node_sound_metal_defaults({
 		footstep = {name = "default_glass_footstep", gain = 0.5},
 		dug = {name = "default_break_glass", gain = 1.0},
-    }),
+    	}),
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -310,8 +310,8 @@ minetest.register_node("nbea:nbox_004", {
 
 minetest.register_node("nbea:nbox_005", {
 	description = "Core Sample",
-    inventory_image = "nbea_core.png^nbea_steel.png",
-    wield_image = "nbea_core.png^nbea_steel.png",
+    	inventory_image = "nbea_core.png^nbea_steel.png",
+    	wield_image = "nbea_core.png^nbea_steel.png",
 --	tiles = {"nbea_core.png^nbea_steel.png"},
 	tiles = {{image = "nbea_core2.png",
 			backface_culling = false,
@@ -320,10 +320,10 @@ minetest.register_node("nbea:nbox_005", {
 				aspect_w = 16,
 				aspect_h = 16,
 				length = 3.0},}},
-    use_texture_alpha = true,
+    	use_texture_alpha = true,
 	drawtype = "nodebox",
 	paramtype = "light",
-    light_source = 10,
+    	light_source = 10,
 	sunlight_propagates = true,
 	climbable = true,
 	is_ground_content = false,
@@ -331,7 +331,7 @@ minetest.register_node("nbea:nbox_005", {
 	sounds = default.node_sound_metal_defaults({
 		footstep = {name = "default_glass_footstep", gain = 0.5},
 		dug = {name = "default_break_glass", gain = 1.0},
-	}),
+		}),
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -390,7 +390,7 @@ minetest.register_node("nbea:nbox_005", {
 			{-0.375, 0.25, -0.5, 0.375, 0.3125, -0.4375},
 			{-0.375, -0.3125, -0.5, 0.375, -0.25, -0.4375},
 			-- center mass  2px--0.0625 / 4px--0.125
-            {-0.0625, -0.0625, -0.0625, 0.0625, 0.0625, 0.0625},
+            		{-0.0625, -0.0625, -0.0625, 0.0625, 0.0625, 0.0625},
 			-- corner frame
 			{-0.4375, 0.4375, 0.4375, 0.4375, 0.5, 0.5},
 			{-0.4375, -0.5, 0.4375, 0.4375, -0.4375, 0.5},
@@ -443,9 +443,9 @@ minetest.register_node("nbea:nbox_006", {
 	wield_image = "nbea_sglass.png",
 	tiles = {"nbea_sglass.png"},
 	drawtype = "nodebox",
-    use_texture_alpha = true,
+    	use_texture_alpha = true,
 	paramtype = "light",
-    light_source = 8,
+    	light_source = 8,
 	climbable = true,
 	sunlight_propagates = true,
 	is_ground_content = false,
@@ -511,7 +511,7 @@ minetest.register_node("nbea:nbox_007", {
 	description = "Reinforced Wood",
 	inventory_image = "default_wood.png^nbea_reinforced.png",
 	wield_image = "default_wood.png^nbea_reinforced.png",
-    tiles = {
+    	tiles = {
         "default_wood.png^nbea_reinforced.png",          -- (Y+)
         "default_wood.png^nbea_reinforced.png",          -- (Y-)
         "default_wood.png^(nbea_reinforced_side.png^[transformFX)",          -- (X+)
@@ -672,9 +672,9 @@ minetest.register_node("nbea:nbox_007", {
 })
 
 minetest.register_node("nbea:nbox_008", {
-    description = "Fireflies",
-    inventory_image = "nbea_fireflies_inv.png",
-    wield_image = "nbea_fireflies_inv.png",
+    	description = "Fireflies",
+    	inventory_image = "nbea_fireflies_inv.png",
+    	wield_image = "nbea_fireflies_inv.png",
 	tiles = {{image = "nbea_fireflies.png",
 			backface_culling = false,
 			animation = {
@@ -682,13 +682,13 @@ minetest.register_node("nbea:nbox_008", {
 				aspect_w = 16,
 				aspect_h = 16,
 				length = 2.5},}},
-    use_texture_alpha = true,
+    	use_texture_alpha = true,
 	drawtype = "nodebox",
 	paramtype = "light",
-    light_source = 12,
+    	light_source = 12,
 	sunlight_propagates = true,
 	is_ground_content = false,
-    groups = {oddly_breakable_by_hand=3, choppy = 3},
+    	groups = {oddly_breakable_by_hand=3, choppy = 3},
 	sounds = default.node_sound_wood_defaults({
 		footstep = {name = "default_glass_footstep", gain = 0.5},
 		dug = {name = "default_break_glass", gain = 1.0},
@@ -719,23 +719,23 @@ minetest.register_node("nbea:nbox_008", {
 			{-0.5, -0.5, -0.5, 0.5, 0.5, 0.5},
 		},
 	},
-    after_destruct = function(pos)
-    minetest.add_particle({
-            pos = {x=pos.x, y=pos.y, z=pos.z},
-            vel ={x=0.25, y=0.50, z=0.0},
-            acc ={x=0.10, y=0.20, z=0.0},
-            expirationtime = 5,
-            minsize = 1,
-            maxsize = 2,
-            collisiondetection = true,
-            texture = "nbea_particle.png"})
+    	after_destruct = function(pos)
+		minetest.add_particle({
+		    pos = {x=pos.x, y=pos.y, z=pos.z},
+		    vel ={x=0.25, y=0.50, z=0.0},
+		    acc ={x=0.10, y=0.20, z=0.0},
+		    expirationtime = 5,
+		    minsize = 1,
+		    maxsize = 2,
+		    collisiondetection = true,
+		    texture = "nbea_particle.png"})
         end
 })
 
 minetest.register_node("nbea:nbox_009", {
 	description = "Monochrome",
-    inventory_image = "nbea_monochrome.png",
-    wield_image = "nbea_monochrome.png",
+    	inventory_image = "nbea_monochrome.png",
+    	wield_image = "nbea_monochrome.png",
 	tiles = {"nbea_monochrome.png"},
 	drawtype = "nodebox",
 	paramtype = "light",
@@ -745,7 +745,7 @@ minetest.register_node("nbea:nbox_009", {
 	sounds = default.node_sound_metal_defaults({
 		place = {name = "default_metal_footstep", gain = 0.5},
 		dig = {name = "default_metal_footstep", gain = 1.0},
-        dug = {name = "default_metal_footstep", gain = 1.0},
+        	dug = {name = "default_metal_footstep", gain = 1.0},
 	}),
 	node_box = {
 		type = "fixed",
@@ -928,7 +928,7 @@ minetest.register_node("nbea:nbox_009", {
 })
 
 minetest.register_node("nbea:nbox_010", {
-    description = "Little Sheep",
+    	description = "Little Sheep",
 	tiles = {
 		"nbea_sheep_top.png",    -- (Y+)
 		"nbea_sheep_bottom.png",    -- (Y-)
@@ -948,7 +948,7 @@ minetest.register_node("nbea:nbox_010", {
 		footstep = {name = "nbea_bounce", gain = 0.25},
         dig = {name = "nbea_bounce", gain = 0.25},
 		dug = {name = "nbea_sheep_hurt", gain = 0.25},
-	}),
+		}),
 	node_box = {
 		type = "fixed",
 		fixed = {
