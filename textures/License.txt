@@ -10,8 +10,11 @@ https://creativecommons.org/licenses/by/3.0/
 
 nbea_core.png
 nbea_core2.png
+nbea_crest.png
 nbea_fireflies.png
 nbea_fireflies_inv.png
+nbea_mese_companion.png
+nbea_mese_companion-001.png
 nbea_particle.png
 nbea_reinforced.png
 nbea_reinforced_side.png
