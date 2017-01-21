@@ -1,4 +1,4 @@
--- NodeBox Editor Abuse Mod v0.1.7.0
+-- NodeBox Editor Abuse Mod v0.1.7.1
 -- by Napiophelios
 -- License: WTFPL
 
@@ -690,20 +690,20 @@ minetest.register_node("nbea:nbox_008", {
 	description = "Fireflies",
 	inventory_image = "nbea_fireflies_inv.png",
 	wield_image = "nbea_fireflies_inv.png",
-	tiles = {
+    tiles = {
 		{image = "nbea_fireflies.png",
 			backface_culling = false,
 			animation = {
 			type = "vertical_frames",
 			aspect_w = 16,
 			aspect_h = 16,
-			length = 4.0},
+			length = 5.0},
 		}
 	},
 	use_texture_alpha = true,
 	drawtype = "nodebox",
 	paramtype = "light",
-	light_source = 12,
+	light_source = 8,
 	sunlight_propagates = true,
 	is_ground_content = false,
 	groups = {oddly_breakable_by_hand=3, choppy = 3},
@@ -714,8 +714,13 @@ minetest.register_node("nbea:nbox_008", {
 	node_box = {
 		type = "fixed",
 		fixed = {
-			-- center mass 14px
-			{-0.4375, -0.4375, -0.4375, 0.4375, 0.4375, 0.4375},
+			-- center mass
+			{-0.375, -0.375, 0.375, 0.375, 0.375, 0.4375},
+			{-0.375, -0.375, -0.4375, 0.375, 0.375, -0.375},
+			{-0.4375, -0.375, -0.4375, -0.375, 0.375, 0.4375},
+			{0.375, -0.375, -0.4375, 0.4375, 0.375, 0.4375},
+			{-0.4375, -0.4375, -0.4375, 0.4375, -0.375, 0.4375},
+			{-0.4375, 0.375, -0.4375, 0.4375, 0.4375, 0.4375},
 			-- corner frame
 			{-0.4375, 0.4375, 0.4375, 0.4375, 0.5, 0.5},
 			{-0.4375, -0.5, 0.4375, 0.4375, -0.4375, 0.5},
@@ -737,15 +742,28 @@ minetest.register_node("nbea:nbox_008", {
 			{-0.5, -0.5, -0.5, 0.5, 0.5, 0.5},
 		},
 	},
+	collision_box = {
+		type = "fixed",
+		fixed = {
+			{-0.4375, -0.4375, 0.4375, 0.4375, 0.4375, 0.5},
+			{-0.4375, -0.4375, -0.5, 0.4375, 0.4375, -0.4375},
+			{-0.5, -0.4375, -0.5, -0.4375, 0.4375, 0.5},
+			{0.4375, -0.4375, -0.5, 0.5, 0.4375, 0.5},
+			{-0.5, -0.5, -0.5, 0.5, -0.4375, 0.5},
+			{-0.5, 0.4375, -0.5, 0.5, 0.5, 0.5},
+		},
+	},
 	after_destruct = function(pos)
 		minetest.add_particle({
 			pos = {x=pos.x, y=pos.y, z=pos.z},
 			vel ={x=0.25, y=0.50, z=0.0},
 			acc ={x=0.10, y=0.20, z=0.0},
-			expirationtime = 5,
+			expirationtime = 8,
 			minsize = 1,
 			maxsize = 2,
-			collisiondetection = true,
+            collisiondetection = true,
+            collision_removal = true,
+            glow = 8,
 			texture = "nbea_particle.png"
 		})
 	end
@@ -1367,6 +1385,36 @@ minetest.register_node("nbea:nbox_014", {
 	end,
 })
 
+-- ABM
+minetest.register_abm({
+	nodenames = {"nbea:nbox_008"},
+	interval = 1,
+	chance = 3,
+	catch_up = false,
+	action = function(pos, node)
+            local image_number = math.random(4)
+            minetest.add_particlespawner({
+                amount = 5,
+                time = 3,
+                minpos =  pos,
+                maxpos =  pos,
+                minvel = {x=-0.025, y=-0.05, z=-0.025},
+                maxvel = {x=0.005,  y=0.5,  z=0.005},
+                minacc = {x=-0.0025,  y=-0.0005,  z=-0.0025},
+                maxacc = {x=0.0025, y=0.05, z=0.0025},
+                minexptime = 3,
+                maxexptime = 5,
+                minsize = 0.5,
+                maxsize = 1,
+                collisiondetection = true,
+                collision_removal = true,
+                glow = 5,
+                texture = "nbea_particle_"..image_number..".png",
+            })
+	end
+})
+
+-- Add Mesecons support
 if minetest.get_modpath("mesecons") then
 dofile(minetest.get_modpath("nbea").."/mesecons.lua")
 end
