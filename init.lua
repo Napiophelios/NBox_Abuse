@@ -207,6 +207,8 @@ minetest.register_node("nbea:nbox_002", {
 			{-0.4375, -0.4375, -0.5, 0.4375, -0.375, -0.4375},
 			{-0.375, 0.25, -0.5, 0.375, 0.3125, -0.4375},
 			{-0.375, -0.3125, -0.5, 0.375, -0.25, -0.4375},
+			-- center mass 14px
+			{-0.4375, -0.4375, -0.4375, 0.4375, 0.4375, 0.4375},
 			-- corner frame
 			{-0.4375, 0.4375, 0.4375, 0.4375, 0.5, 0.5},
 			{-0.4375, -0.5, 0.4375, 0.4375, -0.4375, 0.5},
@@ -316,7 +318,6 @@ minetest.register_node("nbea:nbox_005", {
 	description = "Core Sample",
 	inventory_image = "nbea_core.png^nbea_steel.png",
 	wield_image = "nbea_core.png^nbea_steel.png",
-	-- tiles = {"nbea_core.png^nbea_steel.png"},
 	tiles = {
 		{image = "nbea_core2.png",
 		backface_culling = false,
@@ -963,7 +964,7 @@ minetest.register_node("nbea:nbox_010", {
 	sunlight_propagates = true,
 	is_ground_content = false,
 	groups = {oddly_breakable_by_hand=3, dig_immediate=3, bouncy=100},
-	sounds = default.node_sound_defaults({
+	sounds = default.node_sound_leaves_defaults({
 		place = {name = "nbea_sheep", gain = 0.25},
 		footstep = {name = "nbea_bounce", gain = 0.25},
 		dig = {name = "nbea_bounce", gain = 0.25},
@@ -1271,7 +1272,7 @@ minetest.register_node("nbea:nbox_012", {
 })
 
 minetest.register_node("nbea:nbox_013", {
---	description = "Minetest Model",
+	description = "Minetest Model",
 	tiles = {
 		"nbea_mticon_top.png",          -- (Y+)
 		"nbea_mticon_bottom.png",          -- (Y-)
@@ -1285,18 +1286,18 @@ minetest.register_node("nbea:nbox_013", {
 	paramtype2 = "facedir",
 	sunlight_propagates = true,
 	is_ground_content = false,
-	groups = {oddly_breakable_by_hand=3},
-	sounds = default.node_sound_wood_defaults(),
+	groups = {oddly_breakable_by_hand=3, not_in_creative_inventory = 1},
+	sounds = default.node_sound_leaves_defaults(),
 	node_box = {
 		type = "fixed",
 		fixed = {
 			{-0.5, -0.5, -0.5, 0.0625, 0.0625, 0.0625},
 			{-0.5, -0.5, 0.0625, -0.1875, 0.0625, 0.5},
-			{-0.1875, -0.5, 0.0625, 0.5, -0.0625, 0.5},
+			{-0.1875, -0.5, 0.0625, 0.5, 0, 0.5},
 			{0.0625, -0.5, -0.5, 0.5, -0.125, 0.0625},
 			{-0.4375, 0.1875, -0.4375, -0.125, 0.4375, -0.125},
 			{-0.3125, 0.0625, -0.3125, -0.25, 0.1875, -0.25},
-			{0.25, -0.0625, 0.25, 0.375, 0.25, 0.375},
+			{0.25, 0, 0.25, 0.375, 0.3125, 0.375},
 		},
 	},
     selection_box = {
@@ -1334,12 +1335,12 @@ minetest.register_node("nbea:nbox_014", {
 		fixed = {
 			{-0.4375, -0.4375, -0.4375, 0.0625, 0.0625, 0.0625},
 			{-0.4375, -0.4375, 0.0625, -0.1875, 0.0625, 0.4375},
-			{-0.1875, -0.4375, 0.0625, 0.4375, -0.0625, 0.4375},
+			{-0.1875, -0.4375, 0.0625, 0.4375, 0, 0.4375},
 			{0.0625, -0.4375, -0.4375, 0.4375, -0.125, 0.0625},
-			{-0.5, -0.5, -0.5, 0.5, -0.4375, 0.5},
 			{-0.4375, 0.1875, -0.4375, -0.125, 0.4375, -0.125},
 			{-0.3125, 0.0625, -0.3125, -0.25, 0.1875, -0.25},
-			{0.25, -0.0625, 0.25, 0.375, 0.25, 0.375},
+			{0.25, 0, 0.25, 0.375, 0.3125, 0.375},
+			{-0.5, -0.5, -0.5, 0.5, -0.4375, 0.5},
 			-- corner frame
 			{-0.4375, 0.4375, 0.4375, 0.4375, 0.5, 0.5},
 			{-0.4375, -0.5, 0.4375, 0.4375, -0.4375, 0.5},
@@ -1365,3 +1366,8 @@ minetest.register_node("nbea:nbox_014", {
 			minetest.set_node(pos, {name= "nbea:nbox_013", param2=node.param2})
 	end,
 })
+
+if minetest.get_modpath("mesecons") then
+dofile(minetest.get_modpath("nbea").."/mesecons.lua")
+end
+
