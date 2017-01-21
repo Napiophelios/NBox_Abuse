@@ -1,4 +1,4 @@
--- NodeBox Editor Abuse Mod v0.1.1.0
+-- NodeBox Editor Abuse Mod v0.1.7.0
 -- by Napiophelios
 -- License: WTFPL
 
