@@ -690,20 +690,11 @@ minetest.register_node("nbea:nbox_008", {
 	description = "Fireflies",
 	inventory_image = "nbea_fireflies_inv.png",
 	wield_image = "nbea_fireflies_inv.png",
-    tiles = {
-		{image = "nbea_fireflies.png",
-			backface_culling = false,
-			animation = {
-			type = "vertical_frames",
-			aspect_w = 16,
-			aspect_h = 16,
-			length = 5.0},
-		}
-	},
+	tiles = {"nbea_frame_wood.png"},
 	use_texture_alpha = true,
 	drawtype = "nodebox",
 	paramtype = "light",
-	light_source = 8,
+	light_source = 3,
 	sunlight_propagates = true,
 	is_ground_content = false,
 	groups = {oddly_breakable_by_hand=3, choppy = 3},
@@ -714,14 +705,7 @@ minetest.register_node("nbea:nbox_008", {
 	node_box = {
 		type = "fixed",
 		fixed = {
-			-- center mass
-			{-0.375, -0.375, 0.375, 0.375, 0.375, 0.4375},
-			{-0.375, -0.375, -0.4375, 0.375, 0.375, -0.375},
-			{-0.4375, -0.375, -0.4375, -0.375, 0.375, 0.4375},
-			{0.375, -0.375, -0.4375, 0.4375, 0.375, 0.4375},
-			{-0.4375, -0.4375, -0.4375, 0.4375, -0.375, 0.4375},
-			{-0.4375, 0.375, -0.4375, 0.4375, 0.4375, 0.4375},
-			-- corner frame
+			{-0.4375, -0.4375, -0.4375, 0.4375, 0.4375, 0.4375},
 			{-0.4375, 0.4375, 0.4375, 0.4375, 0.5, 0.5},
 			{-0.4375, -0.5, 0.4375, 0.4375, -0.4375, 0.5},
 			{-0.5, -0.5, 0.4375, -0.4375, 0.5, 0.5},
@@ -745,26 +729,20 @@ minetest.register_node("nbea:nbox_008", {
 	collision_box = {
 		type = "fixed",
 		fixed = {
-			{-0.4375, -0.4375, 0.4375, 0.4375, 0.4375, 0.5},
-			{-0.4375, -0.4375, -0.5, 0.4375, 0.4375, -0.4375},
-			{-0.5, -0.4375, -0.5, -0.4375, 0.4375, 0.5},
-			{0.4375, -0.4375, -0.5, 0.5, 0.4375, 0.5},
-			{-0.5, -0.5, -0.5, 0.5, -0.4375, 0.5},
-			{-0.5, 0.4375, -0.5, 0.5, 0.5, 0.5},
+			{-0.5, -0.5, -0.5, 0.5, 0.5, 0.5},
 		},
 	},
 	after_destruct = function(pos)
 		minetest.add_particle({
 			pos = {x=pos.x, y=pos.y, z=pos.z},
-			vel ={x=0.25, y=0.50, z=0.0},
-			acc ={x=0.10, y=0.20, z=0.0},
-			expirationtime = 8,
+			vel ={x=0.25, y=0.05, z=0.25},
+			acc ={x=0.010, y=0.025, z=0.010},
+			expirationtime = 5,
 			minsize = 1,
 			maxsize = 2,
             collisiondetection = true,
-            --collision_removal = true,
             glow = 8,
-			texture = "nbea_particle.png"
+			texture = "nbea_particle_1.png"
 		})
 	end
 })
@@ -1459,21 +1437,21 @@ minetest.register_abm({
 	action = function(pos, node)
             local image_number = math.random(4)
             minetest.add_particlespawner({
-                amount = 5,
+                amount = 6,
                 time = 3,
-                minpos =  pos,
-                maxpos =  pos,
-                minvel = {x=-0.025, y=-0.05, z=-0.025},
-                maxvel = {x=0.005,  y=0.5,  z=0.005},
-                minacc = {x=-0.0025,  y=-0.0005,  z=-0.0025},
-                maxacc = {x=0.0025, y=0.05, z=0.0025},
-                minexptime = 3,
-                maxexptime = 5,
+                minpos = {x=pos.x-0.175, y=pos.y-0.350, z=pos.z-0.175},
+                maxpos = {x=pos.x+0.175, y=pos.y+0.350, z=pos.z+0.175},
+                minvel = {x=-0.01, y=-0.02, z=-0.01},
+                maxvel = {x=0.001,  y=0.001,  z=0.001},
+                minacc = {x=-0.125,  y=-0.15,  z=-0.125},
+                maxacc = {x=0.015, y=0.05, z=0.015},
+                minexptime = 1.0,
+                maxexptime = 1.75,
                 minsize = 0.5,
-                maxsize = 1,
+                maxsize = 1.5,
                 collisiondetection = true,
-                --collision_removal = true,
-                glow = 5,
+                collision_removal = true,
+                glow = 8,
                 texture = "nbea_particle_"..image_number..".png",
             })
 	end
