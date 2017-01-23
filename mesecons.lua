@@ -24,10 +24,21 @@ local nbea_rules = {
 
 minetest.register_node("nbea:nbox_003_on", {
 	description = "Inner-Cube",
-	tiles = {"default_meselamp.png"},
+	tiles = {
+		{image = "nbea_core1.png",
+		backface_culling = false,
+			animation = {
+				type = "vertical_frames",
+				aspect_w = 16,
+				aspect_h = 16,
+				length = 1.25
+			},
+		}
+	},
+	use_texture_alpha = true,
 	drawtype = "nodebox",
 	paramtype = "light",
-	light_source = 11,
+	light_source = 8,
 	sunlight_propagates = true,
 	is_ground_content = false,
     drop = "nbea:nbox_003",
@@ -52,8 +63,8 @@ minetest.register_node("nbea:nbox_003_on", {
 			{0.4375, -0.5, -0.5, 0.5, -0.4375, 0.5},
 			{0.4375, -0.4375, 0.4375, 0.5, 0.4375, 0.5},
 			{0.4375, -0.4375, -0.5, 0.5, 0.4375, -0.4375},
-			-- center mass 6px
-			{-0.1875, -0.1875, -0.1875, 0.1875, 0.1875, 0.1875},
+			-- center mass 2px--0.0625 / 4px--0.125 / 6px--0.1875
+			{-0.0625, -0.0625, -0.0625, 0.0625, 0.0625, 0.0625},
 		},
 	},
 	selection_box = {
@@ -74,11 +85,21 @@ minetest.register_node("nbea:nbox_005_off", {
 	description = "Core Sample",
 	inventory_image = "nbea_core.png^nbea_steel.png",
 	wield_image = "nbea_core.png^nbea_steel.png",
-    tiles = {"nbea_core.png^nbea_steel.png"},
+	tiles = {
+		{image = "nbea_core3.png",
+		backface_culling = false,
+			animation = {
+				type = "vertical_frames",
+				aspect_w = 16,
+				aspect_h = 16,
+				length = 4.0
+			},
+		}
+	},
 	use_texture_alpha = true,
 	drawtype = "nodebox",
 	paramtype = "light",
-	light_source = 3,
+	light_source = 5,
 	sunlight_propagates = true,
 	climbable = true,
 	is_ground_content = false,
@@ -144,8 +165,6 @@ minetest.register_node("nbea:nbox_005_off", {
 			{-0.4375, -0.4375, -0.5, 0.4375, -0.375, -0.4375},
 			{-0.375, 0.25, -0.5, 0.375, 0.3125, -0.4375},
 			{-0.375, -0.3125, -0.5, 0.375, -0.25, -0.4375},
-			-- center mass 2px--0.0625 / 4px--0.125
-			{-0.0625, -0.0625, -0.0625, 0.0625, 0.0625, 0.0625},
 			-- corner frame
 			{-0.4375, 0.4375, 0.4375, 0.4375, 0.5, 0.5},
 			{-0.4375, -0.5, 0.4375, 0.4375, -0.4375, 0.5},
@@ -159,6 +178,8 @@ minetest.register_node("nbea:nbox_005_off", {
 			{-0.5, -0.5, -0.5, 0.5, -0.4375, -0.4375},
 			{0.4375, -0.4375, -0.5, 0.5, 0.4375, -0.4375},
 			{-0.5, -0.4375, -0.5, -0.4375, 0.4375, -0.4375},
+			-- center mass 2px--0.0625 / 4px--0.125 / 6px--0.1875
+			{-0.125, -0.125, -0.125, 0.125, 0.125, 0.125},
 		},
 	},
 	selection_box = {
@@ -176,7 +197,7 @@ minetest.register_node("nbea:nbox_005_off", {
 })
 
 minetest.override_item("nbea:nbox_003", {
-	light_source = 3,
+	light_source = 5,
 	groups = {cracky = 3,  mesecon_effector_off = 1, mesecon = 3},
 	mesecons = {effector = {
         rules = nbea_rules,
@@ -194,7 +215,7 @@ minetest.override_item("nbea:nbox_004", {
 })
 
 minetest.override_item("nbea:nbox_005", {
-	light_source = 11,
+	light_source = 8,
 	groups = {cracky = 3, mesecon = 1, not_in_creative_inventory = 1},
     drop = "nbea:nbox_005_off",
 	mesecons = {effector = {
@@ -203,4 +224,33 @@ minetest.override_item("nbea:nbox_005", {
             minetest.swap_node(pos, {name = "nbea:nbox_005_off", param2 = node.param2})
         end,
     }}
+})
+
+-- ABM
+minetest.register_abm({
+	nodenames = {"nbea:nbox_003_on"},
+	interval = 1,
+	chance = 1,
+	catch_up = false,
+	action = function(pos, node)
+            local image_number = math.random(4)
+            minetest.add_particlespawner({
+                amount = 50,
+                time = 1,
+                minpos = {x=pos.x-0.15, y=pos.y-0.15, z=pos.z-0.15},
+                maxpos = {x=pos.x+0.15, y=pos.y+0.15, z=pos.z+0.15},
+                minvel = {x=-0.01, y=-0.02, z=-0.01},
+                maxvel = {x=0.005,  y=0.005,  z=0.005},
+                minacc = {x=-0.1,  y=-0.1,  z=-0.1},
+                maxacc = {x=1.0, y=1.0, z=1.0},
+                minexptime = 0.05,
+                maxexptime = 0.15,
+                minsize = 0.15,
+                maxsize = 0.15,
+                collisiondetection = true,
+                collision_removal = true,
+                glow = 10,
+                texture = "nbea_core_particle.png",
+            })
+	end
 })
