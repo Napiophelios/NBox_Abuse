@@ -15,6 +15,7 @@ Several pointless nodes that look neat
 ##depends :
 
 - default
+- mesecons?
 
 =====================
 
