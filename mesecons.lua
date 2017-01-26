@@ -50,7 +50,7 @@ minetest.register_node("nbea:nbox_003_on", {
 	light_source = 8,
 	sunlight_propagates = true,
 	is_ground_content = false,
-    drop = "nbea:nbox_003",
+    	drop = "nbea:nbox_003",
 	groups = {cracky = 3, mesecon = 2, not_in_creative_inventory = 1},
 	sounds = default.node_sound_metal_defaults({
 		footstep = {name = "default_glass_footstep", gain = 0.5},
@@ -226,7 +226,7 @@ minetest.override_item("nbea:nbox_004", {
 minetest.override_item("nbea:nbox_005", {
 	light_source = 8,
 	groups = {cracky = 3, mesecon = 1, not_in_creative_inventory = 1},
-    drop = "nbea:nbox_005_off",
+    	drop = "nbea:nbox_005_off",
 	mesecons = {effector = {
         rules = nbea_rules,
         action_off = function (pos, node)
@@ -281,7 +281,7 @@ minetest.register_node("nbea:nbox_009_on", {
 	paramtype = "light",
 	sunlight_propagates = true,
 	is_ground_content = false,
-    drop = "nbea:nbox_009",
+    	drop = "nbea:nbox_009",
 	groups = {cracky = 3, mesecon = 1, not_in_creative_inventory = 1},
 	sounds = default.node_sound_metal_defaults({
 		place = {name = "default_metal_footstep", gain = 0.5},
