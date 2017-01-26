@@ -1399,6 +1399,34 @@ minetest.register_abm({
 	end
 })
 
+--[[minetest.register_abm({
+	nodenames = {"nbea:nbox_003", "nbea:nbox_005_off"},
+	interval = 1,
+	chance = 1,
+	catch_up = false,
+	action = function(pos, node)
+            local image_number = math.random(4)
+            minetest.add_particlespawner({
+                amount = 3,
+                time = 1,
+                minpos = {x=pos.x-0.2, y=pos.y-0.2, z=pos.z-0.2},
+                maxpos = {x=pos.x+0.2, y=pos.y+0.2, z=pos.z+0.2},
+                minvel = {x=-0.005, y=-0.005, z=-0.005},
+                maxvel = {x=0.005,  y=0.005,  z=0.005},
+                minacc = {x=-0.01,  y=-0.01,  z=-0.01},
+                maxacc = {x=0.01, y=0.01, z=0.01},
+                minexptime = 0.5,
+                maxexptime = 0.75,
+                minsize = 0.1,
+                maxsize = 0.15,
+                collisiondetection = true,
+                collision_removal = true,
+                glow = 10,
+                texture = "nbea_core_particle.png",
+            })
+	end
+ })--]]
+
 -- Add Mesecons support
 if minetest.get_modpath("mesecons") then
 dofile(minetest.get_modpath("nbea").."/mesecons.lua")

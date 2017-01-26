@@ -6,6 +6,13 @@
 
 --minor mesecons support
 
+local nbea, sounds = {}, {}
+
+function nbea.stop_sound(pos)
+	local spos = minetest.hash_node_position(pos)
+	if sounds[spos] then minetest.sound_stop(sounds[spos]) end
+end
+
 local nbea_rules = {
 	{x=0,  y=0,  z=-1},
 	{x=1,  y=0,  z=0},
@@ -21,6 +28,8 @@ local nbea_rules = {
 	{x=0,  y=-1, z=-1},
 	{x=0,  y=-1, z=0},
 }
+
+
 
 minetest.register_node("nbea:nbox_003_on", {
 	description = "Inner-Cube",
@@ -196,6 +205,65 @@ minetest.register_node("nbea:nbox_005_off", {
     }},
 })
 
+minetest.override_item("nbea:nbox_003", {
+	light_source = 5,
+	groups = {cracky = 3,  mesecon_effector_off = 1, mesecon = 3},
+	mesecons = {effector = {
+        rules = nbea_rules,
+        action_on = function (pos, node)
+            minetest.swap_node(pos, {name = "nbea:nbox_003_on", param2 = node.param2})
+        end,
+    }}
+})
+
+minetest.override_item("nbea:nbox_004", {
+	groups = {cracky = 1, mesecon = 1},
+	mesecons = {receptor = {
+		state = mesecon.state.on
+	}}
+})
+
+minetest.override_item("nbea:nbox_005", {
+	light_source = 8,
+	groups = {cracky = 3, mesecon = 1, not_in_creative_inventory = 1},
+    drop = "nbea:nbox_005_off",
+	mesecons = {effector = {
+        rules = nbea_rules,
+        action_off = function (pos, node)
+            minetest.swap_node(pos, {name = "nbea:nbox_005_off", param2 = node.param2})
+        end,
+    }}
+})
+
+-- ABM
+minetest.register_abm({
+	nodenames = {"nbea:nbox_003_on"},
+	interval = 1,
+	chance = 1,
+	catch_up = false,
+	action = function(pos, node)
+            local image_number = math.random(4)
+            minetest.add_particlespawner({
+                amount = 50,
+                time = 1,
+                minpos = {x=pos.x-0.15, y=pos.y-0.15, z=pos.z-0.15},
+                maxpos = {x=pos.x+0.15, y=pos.y+0.15, z=pos.z+0.15},
+                minvel = {x=-0.01, y=-0.02, z=-0.01},
+                maxvel = {x=0.005,  y=0.005,  z=0.005},
+                minacc = {x=-0.1,  y=-0.1,  z=-0.1},
+                maxacc = {x=1.0, y=1.0, z=1.0},
+                minexptime = 0.05,
+                maxexptime = 0.15,
+                minsize = 0.15,
+                maxsize = 0.15,
+                collisiondetection = true,
+                collision_removal = true,
+                glow = 10,
+                texture = "nbea_core_particle.png",
+            })
+	end
+})
+
 minetest.register_node("nbea:nbox_009_on", {
 	description = "Monochrome",
 	tiles = {
@@ -214,12 +282,22 @@ minetest.register_node("nbea:nbox_009_on", {
 	sunlight_propagates = true,
 	is_ground_content = false,
     drop = "nbea:nbox_009",
-	groups = {cracky = 3, not_in_creative_inventory = 1},
+	groups = {cracky = 3, mesecon = 1, not_in_creative_inventory = 1},
 	sounds = default.node_sound_metal_defaults({
 		place = {name = "default_metal_footstep", gain = 0.5},
 		dig = {name = "default_metal_footstep", gain = 1.0},
 		dug = {name = "default_metal_footstep", gain = 1.0},
 	}),
+	on_destruct = function(pos)
+            nbea.stop_sound(pos)
+	end,
+	mesecons = {effector = {
+        state = mesecon.state.on,
+        action_off = function (pos, node)
+            nbea.stop_sound(pos)
+            minetest.swap_node(pos, {name = "nbea:nbox_009"})
+        end,
+    }},
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -400,82 +478,19 @@ minetest.register_node("nbea:nbox_009_on", {
 			{-0.5, -0.5, -0.5, 0.5, 0.5, 0.5},
 		},
 	},
---    on_rightclick = function(pos, node)
---    minetest.sound_play("nbea_mc", { pos=pos, max_hear_distance=3, gain=0.8})
---    end,
-	mesecons = {effector = {
-        state = mesecon.state.on,
-        action_off = function (pos, node)
-            minetest.swap_node(pos, {name = "nbea:nbox_009"})
-        end,
-    }},
-})
-
-minetest.override_item("nbea:nbox_003", {
-	light_source = 5,
-	groups = {cracky = 3,  mesecon_effector_off = 1, mesecon = 3},
-	mesecons = {effector = {
-        rules = nbea_rules,
-        action_on = function (pos, node)
-            minetest.swap_node(pos, {name = "nbea:nbox_003_on", param2 = node.param2})
-        end,
-    }}
-})
-
-minetest.override_item("nbea:nbox_004", {
-	groups = {cracky = 1, mesecon = 1},
-	mesecons = {receptor = {
-		state = mesecon.state.on
-	}}
-})
-
-minetest.override_item("nbea:nbox_005", {
-	light_source = 8,
-	groups = {cracky = 3, mesecon = 1, not_in_creative_inventory = 1},
-    drop = "nbea:nbox_005_off",
-	mesecons = {effector = {
-        rules = nbea_rules,
-        action_off = function (pos, node)
-            minetest.swap_node(pos, {name = "nbea:nbox_005_off", param2 = node.param2})
-        end,
-    }}
 })
 
 minetest.override_item("nbea:nbox_009", {
-	groups = {cracky = 3},
+	groups = {cracky = 3, mesecon_effector_off = 1, mesecon = 1},
+	on_construct = function(pos)
+            nbea.stop_sound(pos)
+	end,
 	mesecons = {effector = {
         state = mesecon.state.off,
         action_on = function (pos, node)
             minetest.swap_node(pos, {name = "nbea:nbox_009_on"})
+            local spos = minetest.hash_node_position(pos)
+            sounds[spos] =minetest.sound_play("nbea_mc",{pos=pos, max_hear_distance=10, gain=1.25, loop=true})
         end,
-    }}
-})
-
--- ABM
-minetest.register_abm({
-	nodenames = {"nbea:nbox_003_on"},
-	interval = 1,
-	chance = 1,
-	catch_up = false,
-	action = function(pos, node)
-            local image_number = math.random(4)
-            minetest.add_particlespawner({
-                amount = 50,
-                time = 1,
-                minpos = {x=pos.x-0.15, y=pos.y-0.15, z=pos.z-0.15},
-                maxpos = {x=pos.x+0.15, y=pos.y+0.15, z=pos.z+0.15},
-                minvel = {x=-0.01, y=-0.02, z=-0.01},
-                maxvel = {x=0.005,  y=0.005,  z=0.005},
-                minacc = {x=-0.1,  y=-0.1,  z=-0.1},
-                maxacc = {x=1.0, y=1.0, z=1.0},
-                minexptime = 0.05,
-                maxexptime = 0.15,
-                minsize = 0.15,
-                maxsize = 0.15,
-                collisiondetection = true,
-                collision_removal = true,
-                glow = 10,
-                texture = "nbea_core_particle.png",
-            })
-	end
+    }},
 })
