@@ -1,4 +1,4 @@
--- NodeBox Editor Abuse Mod v0.1.8.0
+-- NodeBox Editor Abuse Mod v0.1.9.0
 -- by Napiophelios
 -- License: WTFPL
 
@@ -934,8 +934,8 @@ minetest.register_node("nbea:nbox_010", {
 minetest.register_node("nbea:nbox_011", {
 	description = "Castle Crest",
 	inventory_image = "nbea_crest.png",
-    wield_image = "nbea_crest.png",
-    tiles = {"nbea_crest.png"},
+    	wield_image = "nbea_crest.png",
+    	tiles = {"nbea_crest.png"},
 	drawtype = "nodebox",
 	paramtype = "light",
 	sunlight_propagates = true,
@@ -1086,7 +1086,7 @@ minetest.register_node("nbea:nbox_011", {
 
 minetest.register_node("nbea:nbox_012", {
 	description = "Mese Companion",
-    tiles = {"nbea_mese_companion.png"},
+    	tiles = {"nbea_mese_companion.png"},
 	drawtype = "nodebox",
 	paramtype = "light",
 	sunlight_propagates = true,
@@ -1152,7 +1152,7 @@ minetest.register_node("nbea:nbox_012", {
 			{-0.4375, -0.125, -0.125, -0.375, 0.125, -0.0625},
 			{-0.4375, -0.125, -0.0625, -0.375, -0.0625, 0.0625},
 			{-0.4375, 0.0625, -0.0625, -0.375, 0.125, 0.0625},
-            {0.375, -0.4375, 0.1875, 0.4375, -0.125, 0.4375},
+            		{0.375, -0.4375, 0.1875, 0.4375, -0.125, 0.4375},
 			{0.375, -0.4375, -0.4375, 0.4375, -0.125, -0.1875},
 			{0.375, 0.1875, 0.125, 0.4375, 0.4375, 0.4375},
 			{0.375, 0.1875, -0.4375, 0.4375, 0.4375, -0.125},
@@ -1327,7 +1327,7 @@ minetest.register_node("nbea:nbox_014", {
 	paramtype2 = "facedir",
 	sunlight_propagates = true,
 	is_ground_content = false,
-    drop = "",
+    	drop = "",
 	groups = {oddly_breakable_by_hand=3},
 	sounds = default.node_sound_wood_defaults({
 		footstep = {name = "default_glass_footstep", gain = 0.5},
