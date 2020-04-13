@@ -1370,6 +1370,24 @@ minetest.register_node("nbea:nbox_014", {
 	end,
 })
 
+-- Allow Minetest Models to be crafted into Minetest Souvenirs
+-- (I was very sad when I broke my souvenir)
+if minetest.get_modpath("xpanes") ~= nil then
+    minetest.register_craft({
+        output = "nbea:nbox_014",
+        recipe = {
+            {"group:stick", "group:pane",    "group:stick"},
+            {"group:pane",  "nbea:nbox_013", "group:pane"},
+            {"group:stick", "group:pane",    "group:stick"}
+        }
+    })
+end
+minetest.register_craft({
+	output = "nbea:nbox_014",
+	type   = "shapeless",
+	recipe = {"nbea:nbox_000", "nbea:nbox_013"}
+})
+
 -- ABM
 minetest.register_abm({
 	nodenames = {"nbea:nbox_008"},
